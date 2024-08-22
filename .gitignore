@@ -13,4 +13,5 @@
 .externalNativeBuild
 .cxx
 local.properties
-BaseValues.kt
+ApiKey.kt
+app/src/main/java/com/example/newsapp/Data/ApiKey.kt
