@@ -11,6 +11,11 @@ class MainViewModel: ViewModel() {
     private val repo = MainRepo()
     val allNews = MutableLiveData<List<DataItem>>()
 
+
+    init{
+        getAllNews()
+    }
+
     fun getAllNews() {
         viewModelScope.launch { allNews.value = repo.getAllNews() }
     }
