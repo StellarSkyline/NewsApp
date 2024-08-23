@@ -51,6 +51,10 @@ dependencies {
     //Channels
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
 
+    //navigation graph
+    implementation("androidx.navigation:navigation-fragment-ktx:2.6.0")
+    implementation("androidx.navigation:navigation-ui-ktx:2.6.0")
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

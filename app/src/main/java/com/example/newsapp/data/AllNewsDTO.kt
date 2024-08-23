@@ -1,4 +1,4 @@
-package com.example.newsapp.Data
+package com.example.newsapp.data
 
 data class Meta(val found: Int = 0,
                 val limit: Int = 0,
