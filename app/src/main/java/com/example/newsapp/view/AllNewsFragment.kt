@@ -14,7 +14,8 @@ import com.example.newsapp.databinding.FragmentAllNewsBinding
 
 
 class AllNewsFragment : Fragment() {
-    private lateinit var vb:FragmentAllNewsBinding
+    private var _vb:FragmentAllNewsBinding? = null
+    private val vb get() = _vb!!
     private lateinit var vm: MainViewModel
     private lateinit var navController: NavController
 
@@ -28,7 +29,7 @@ class AllNewsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        vb = FragmentAllNewsBinding.inflate(inflater, container, false)
+        _vb = FragmentAllNewsBinding.inflate(inflater, container, false)
         return vb.root
     }
 
@@ -44,5 +45,10 @@ class AllNewsFragment : Fragment() {
 //                Log.d("STLog", data.title)
 //            }
 //        }
+    }
+
+    override fun onDestroyView() {
+        _vb = null
+        super.onDestroyView()
     }
 }

@@ -13,7 +13,8 @@ import com.example.newsapp.viewmodel.MainViewModel
 import com.example.newsapp.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
-    private lateinit var vb: FragmentHomeBinding
+    private var _vb: FragmentHomeBinding? = null
+    private val vb get() = _vb!!
     private lateinit var vm: MainViewModel
     private lateinit var navController: NavController
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,7 +27,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // View Binding Inflate
-        vb = FragmentHomeBinding.inflate(inflater, container, false)
+        _vb = FragmentHomeBinding.inflate(inflater, container, false)
         return vb.root
     }
 
@@ -36,6 +37,11 @@ class HomeFragment : Fragment() {
         vb.btnNext.setOnClickListener {
             navController.navigate(R.id.action_homeFragment_to_allNewsFragment)
         }
+    }
+
+    override fun onDestroyView() {
+        _vb = null
+        super.onDestroyView()
     }
 
 }
