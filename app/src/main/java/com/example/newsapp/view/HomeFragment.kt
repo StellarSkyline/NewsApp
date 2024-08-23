@@ -9,17 +9,17 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.example.newsapp.R
-import com.example.newsapp.viewmodel.MainViewModel
+import com.example.newsapp.viewmodel.AllNewsViewModel
 import com.example.newsapp.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
     private var _vb: FragmentHomeBinding? = null
     private val vb get() = _vb!!
-    private lateinit var vm: MainViewModel
+    private lateinit var vm: AllNewsViewModel
     private lateinit var navController: NavController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        vm = ViewModelProvider(this)[MainViewModel::class.java]
+        vm = ViewModelProvider(this)[AllNewsViewModel::class.java]
     }
 
     override fun onCreateView(

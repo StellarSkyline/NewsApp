@@ -7,7 +7,7 @@ import com.example.newsapp.data.DataItem
 import com.example.newsapp.repo.MainRepo
 import kotlinx.coroutines.launch
 
-class MainViewModel: ViewModel() {
+class AllNewsViewModel: ViewModel() {
     private val repo = MainRepo()
     val allNews = MutableLiveData<List<DataItem>>()
 

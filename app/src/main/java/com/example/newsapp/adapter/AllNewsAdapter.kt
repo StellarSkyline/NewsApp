@@ -16,6 +16,5 @@ class AllNewsAdapter(val data: List<DataItem>) : RecyclerView.Adapter<AllNewsAda
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.tvTitle.text = data[position].title
-        holder.binding.tvDescription.text = data[position].description
     }
 }

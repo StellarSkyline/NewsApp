@@ -12,23 +12,19 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.newsapp.data.DataItem
-import com.example.newsapp.viewmodel.MainViewModel
+import com.example.newsapp.viewmodel.AllNewsViewModel
 import com.example.newsapp.databinding.FragmentAllNewsBinding
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 
 class AllNewsFragment : Fragment() {
     private var _vb: FragmentAllNewsBinding? = null
     private val vb get() = _vb!!
-    private lateinit var vm: MainViewModel
+    private lateinit var vm: AllNewsViewModel
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        vm = ViewModelProvider(this)[MainViewModel::class.java]
+        vm = ViewModelProvider(this)[AllNewsViewModel::class.java]
 
     }
 
@@ -47,11 +43,8 @@ class AllNewsFragment : Fragment() {
         navController = vb.root.findNavController()
         vb.btnBack.setOnClickListener { navController.navigateUp() }
 
-
-        //set up
-
-
         vm.allNews.observe(viewLifecycleOwner) { allNews ->
+            vb.spinner.root.visibility = View.GONE
             vb.rvAllNews.apply {
                 adapter = AllNewsAdapter(allNews)
                 layoutManager = LinearLayoutManager(context)
