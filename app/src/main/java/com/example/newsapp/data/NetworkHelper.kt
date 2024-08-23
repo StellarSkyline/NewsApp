@@ -7,8 +7,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 object NetworkHelper {
-    private val okHttpClient = OkHttpClient.Builder()
-        .addInterceptor(AuthInterceptor(ApiKey.apiToken))
+    private val interceptor = OkHttpClient.Builder()
+        .addInterceptor(AuthInterceptor(ApiKey.token))
         .connectTimeout(10, TimeUnit.SECONDS) // Connect timeout
         .readTimeout(10, TimeUnit.SECONDS)    // Socket timeout
         .build()
@@ -17,7 +17,7 @@ object NetworkHelper {
         .baseUrl(BaseValues.baseURL)
         .addConverterFactory(GsonConverterFactory.create())
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
-        .client(okHttpClient)
+        .client(interceptor)
         .build()
         .create(MyAPI::class.java)
 }

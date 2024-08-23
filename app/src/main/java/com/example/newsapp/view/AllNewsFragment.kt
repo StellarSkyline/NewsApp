@@ -38,11 +38,11 @@ class AllNewsFragment : Fragment() {
         vb.btnBack.setOnClickListener { navController.navigateUp() }
 
         //Test Code to make Sure API Call Works
-        vm.getAllNews()
-        vm.allNews.observe(viewLifecycleOwner) { dataList ->
-            dataList.forEach { data ->
-                Log.d("STLog", data.title)
-            }
-        }
+//        vm.getAllNews()
+//        vm.allNews.observe(viewLifecycleOwner) { dataList ->
+//            dataList.forEach { data ->
+//                Log.d("STLog", data.title)
+//            }
+//        }
     }
 }

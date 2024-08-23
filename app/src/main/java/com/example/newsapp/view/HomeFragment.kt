@@ -36,8 +36,6 @@ class HomeFragment : Fragment() {
         vb.btnNext.setOnClickListener {
             navController.navigate(R.id.action_homeFragment_to_allNewsFragment)
         }
-
-
     }
 
 }

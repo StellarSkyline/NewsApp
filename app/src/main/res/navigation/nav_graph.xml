@@ -11,15 +11,13 @@
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_allNewsFragment"
-            app:destination="@id/allNewsFragment" />
+            app:destination="@id/allNewsFragment"
+            app:launchSingleTop="false"
+            app:popUpTo="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/allNewsFragment"
         android:name="com.example.newsapp.view.AllNewsFragment"
         android:label="fragment_all_news"
-        tools:layout="@layout/fragment_all_news" >
-        <action
-            android:id="@+id/pop_up_home"
-            app:popUpTo="@id/homeFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_all_news" />
 </navigation>
