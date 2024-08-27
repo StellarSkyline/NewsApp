@@ -17,6 +17,8 @@ class NewsFragment : Fragment() {
     private lateinit var navController: NavController
     private val args: NewsFragmentArgs by navArgs()
 
+    //TODO: add webView to display URL page
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
