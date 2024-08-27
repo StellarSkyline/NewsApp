@@ -8,7 +8,7 @@ data class Meta(val found: Int = 0,
 
 data class DataItem(val snippet: String = "",
                     val keywords: String = "",
-                    val imageUrl: String = "",
+                    val imageUrl: String? = "",
                     val description: String = "",
                     val language: String = "",
                     val source: String = "",

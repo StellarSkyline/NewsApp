@@ -19,5 +19,21 @@
         android:id="@+id/allNewsFragment"
         android:name="com.example.newsapp.view.AllNewsFragment"
         android:label="fragment_all_news"
-        tools:layout="@layout/fragment_all_news" />
+        tools:layout="@layout/fragment_all_news" >
+        <action
+            android:id="@+id/action_allNewsFragment_to_newsFragment"
+            app:destination="@id/newsFragment"
+            app:popUpTo="@id/allNewsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newsFragment"
+        android:name="com.example.newsapp.view.NewsFragment"
+        android:label="fragment_news"
+        tools:layout="@layout/fragment_news" >
+        <argument
+            android:name="url"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="null" />
+    </fragment>
 </navigation>
