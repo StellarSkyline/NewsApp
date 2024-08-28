@@ -5,6 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebChromeClient
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
@@ -17,7 +20,6 @@ class NewsFragment : Fragment() {
     private lateinit var navController: NavController
     private val args: NewsFragmentArgs by navArgs()
 
-    //TODO: add webView to display URL page
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,9 +38,16 @@ class NewsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = vb.root.findNavController()
-        vb.tvUrl.text = args.url
-        vb.btnBack.setOnClickListener {
-            navController.navigateUp()
+        vb.btnBack.setOnClickListener { navController.navigateUp() }
+
+        vb.wvNews.apply {
+            webViewClient = object : WebViewClient() {
+                override fun onPageFinished(view: WebView?, url: String?) {
+                    super.onPageFinished(view, url)
+                    vb.includeSpinner.root.visibility = View.GONE
+                }
+            }
+            loadUrl(args.url!!)
         }
 
     }
