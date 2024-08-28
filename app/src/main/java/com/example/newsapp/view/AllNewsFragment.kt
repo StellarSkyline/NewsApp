@@ -72,12 +72,3 @@ class AllNewsFragment : Fragment() {
 
 
 }
-
-/**
- * override fun onClick(v: View) {
- *    val amountTv: EditText = view!!.findViewById(R.id.editTextAmount)
- *    val amount = amountTv.text.toString().toInt()
- *    val action = SpecifyAmountFragmentDirections.confirmationAction(amount)
- *    v.findNavController().navigate(action)
- * }
- */
