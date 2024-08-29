@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2024. Seth Torralba
+ */
+
 package com.example.newsapp.di
 
 import android.app.Application

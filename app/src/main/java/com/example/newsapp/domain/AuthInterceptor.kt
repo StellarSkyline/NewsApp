@@ -1,4 +1,8 @@
-package com.example.newsapp.data
+/*
+ * Copyright (c) 2024. Seth Torralba
+ */
+
+package com.example.newsapp.domain
 
 import okhttp3.Interceptor
 import okhttp3.Response

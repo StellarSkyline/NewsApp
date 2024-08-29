@@ -1,9 +1,11 @@
-package com.example.newsapp.data
+/*
+ * Copyright (c) 2024. Seth Torralba
+ */
 
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+package com.example.newsapp.domain
+
+import com.example.newsapp.data.ApiKey
 import okhttp3.OkHttpClient
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 object NetworkHelper {

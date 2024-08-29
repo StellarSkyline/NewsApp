@@ -1,18 +1,18 @@
+/*
+ * Copyright (c) 2024. Seth Torralba
+ */
+
 package com.example.newsapp.data.repo
 
-import android.app.Application
 import android.util.Log
-import com.example.newsapp.data.AllNewsRepo
-import com.example.newsapp.data.AllNewsResponse
+import com.example.newsapp.domain.repo.AllNewsRepo
 import com.example.newsapp.data.DataItem
-import com.example.newsapp.data.MyAPI
-import com.example.newsapp.data.NetworkHelper
-import retrofit2.Response
+import com.example.newsapp.domain.MyAPI
 
 
 class AllNewsRepoImpl(
-    private val api:MyAPI,
-):AllNewsRepo {
+    private val api: MyAPI,
+): AllNewsRepo {
     //Api Calls
     override suspend fun getAllNews(): List<DataItem> {
         //Api Network call

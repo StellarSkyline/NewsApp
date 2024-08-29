@@ -1,15 +1,18 @@
+/*
+ * Copyright (c) 2024. Seth Torralba
+ */
+
 package com.example.newsapp.di
 
-import com.example.newsapp.data.AllNewsRepo
+import com.example.newsapp.domain.repo.AllNewsRepo
 import com.example.newsapp.data.BaseValues
-import com.example.newsapp.data.MyAPI
-import com.example.newsapp.data.NetworkHelper.interceptor
+import com.example.newsapp.domain.MyAPI
+import com.example.newsapp.domain.NetworkHelper.interceptor
 import com.example.newsapp.data.repo.AllNewsRepoImpl
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.scopes.ViewModelScoped
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -22,7 +25,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun providesMyApi():MyAPI {
+    fun providesMyApi(): MyAPI {
         return Retrofit.Builder()
             .baseUrl(BaseValues.baseURL)
             .addConverterFactory(GsonConverterFactory.create())
@@ -34,7 +37,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun providesAllNewsRepo(api:MyAPI): AllNewsRepo = AllNewsRepoImpl(api)
+    fun providesAllNewsRepo(api: MyAPI): AllNewsRepo = AllNewsRepoImpl(api)
 
 
 }
