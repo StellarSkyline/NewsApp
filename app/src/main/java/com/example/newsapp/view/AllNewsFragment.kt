@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,16 +21,13 @@ import dagger.hilt.android.AndroidEntryPoint
 class AllNewsFragment : Fragment() {
     private var _vb: FragmentAllNewsBinding? = null
     private val vb get() = _vb!!
-//    private lateinit var vm: AllNewsViewModel
     private val vm: AllNewsViewModel by viewModels()
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //Network call
-        //vm = ViewModelProvider(this)[AllNewsViewModel::class.java]
         vm.getAllNews()
-
     }
 
     override fun onCreateView(
@@ -49,8 +45,6 @@ class AllNewsFragment : Fragment() {
         navController = vb.root.findNavController()
         vb.btnBack.setOnClickListener { navController.navigateUp() }
 
-
-
         vm.allNews.observe(viewLifecycleOwner) { allNews ->
             vb.spinner.root.visibility = View.GONE
             vb.rvAllNews.apply {
@@ -59,7 +53,6 @@ class AllNewsFragment : Fragment() {
             }
             allNews.forEach { Log.d("STLog", it.title) }
         }
-
     }
 
     private fun onItemClicked(url:String) {
