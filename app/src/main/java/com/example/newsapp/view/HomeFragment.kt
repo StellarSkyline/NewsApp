@@ -15,11 +15,9 @@ import com.example.newsapp.databinding.FragmentHomeBinding
 class HomeFragment : Fragment() {
     private var _vb: FragmentHomeBinding? = null
     private val vb get() = _vb!!
-    private lateinit var vm: AllNewsViewModel
     private lateinit var navController: NavController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        vm = ViewModelProvider(this)[AllNewsViewModel::class.java]
     }
 
     override fun onCreateView(

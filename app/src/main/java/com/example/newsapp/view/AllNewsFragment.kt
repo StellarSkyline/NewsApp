@@ -22,13 +22,14 @@ import dagger.hilt.android.AndroidEntryPoint
 class AllNewsFragment : Fragment() {
     private var _vb: FragmentAllNewsBinding? = null
     private val vb get() = _vb!!
-    private lateinit var vm: AllNewsViewModel
+//    private lateinit var vm: AllNewsViewModel
+    private val vm: AllNewsViewModel by viewModels()
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //Network call
-        vm = ViewModelProvider(this)[AllNewsViewModel::class.java]
+        //vm = ViewModelProvider(this)[AllNewsViewModel::class.java]
         vm.getAllNews()
 
     }
