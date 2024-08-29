@@ -1,16 +1,22 @@
-package com.example.newsapp.repo
+package com.example.newsapp.data.repo
 
+import android.app.Application
 import android.util.Log
-import com.example.newsapp.data.ApiKey
+import com.example.newsapp.data.AllNewsRepo
+import com.example.newsapp.data.AllNewsResponse
 import com.example.newsapp.data.DataItem
+import com.example.newsapp.data.MyAPI
 import com.example.newsapp.data.NetworkHelper
+import retrofit2.Response
 
 
-class MainRepo {
+class AllNewsRepoImpl(
+    private val api:MyAPI,
+):AllNewsRepo {
     //Api Calls
-    suspend fun getAllNews(): List<DataItem> {
+    override suspend fun getAllNews(): List<DataItem> {
         //Api Network call
-        val response = NetworkHelper.api.getAllNews("en",3)
+        val response = api.getAllNews("en",3)
 
         //Testing for Error and returning Success
         if (response.isSuccessful) return response.body()!!.data!!
