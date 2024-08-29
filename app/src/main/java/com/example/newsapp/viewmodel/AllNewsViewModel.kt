@@ -1,15 +1,19 @@
 package com.example.newsapp.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.newsapp.data.AllNewsRepo
 import com.example.newsapp.data.DataItem
-import com.example.newsapp.repo.MainRepo
+import com.example.newsapp.data.repo.AllNewsRepoImpl
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class AllNewsViewModel : ViewModel() {
-    private val repo = MainRepo()
+@HiltViewModel
+class AllNewsViewModel @Inject constructor(
+    private val repo:AllNewsRepo
+) : ViewModel() {
     val allNews = MutableLiveData<List<DataItem>>()
 
     fun getAllNews() {
