@@ -4,6 +4,7 @@
 
 package com.example.newsapp.di
 
+import android.app.Application
 import com.example.newsapp.domain.repo.AllNewsRepo
 import com.example.newsapp.data.BaseValues
 import com.example.newsapp.domain.MyAPI
@@ -38,6 +39,4 @@ object AppModule {
     @Provides
     @Singleton
     fun providesAllNewsRepo(api: MyAPI): AllNewsRepo = AllNewsRepoImpl(api)
-
-
 }
