@@ -4,12 +4,11 @@
 
 package com.example.newsapp.di
 
-import android.app.Application
-import com.example.newsapp.domain.repo.AllNewsRepo
 import com.example.newsapp.data.BaseValues
+import com.example.newsapp.data.repo.AllNewsRepoImpl
 import com.example.newsapp.domain.MyAPI
 import com.example.newsapp.domain.NetworkHelper.interceptor
-import com.example.newsapp.data.repo.AllNewsRepoImpl
+import com.example.newsapp.domain.repo.AllNewsRepo
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
