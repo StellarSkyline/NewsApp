@@ -34,7 +34,7 @@ import com.example.newsapp.viewmodel.AllNewsViewModel
 //TODO: Figure out loading screen and how to hide show it based of state
 
 @Composable
-fun AllNewsScreen(navController: NavController = rememberNavController()) {
+fun AllNewsScreen(navController: NavController) {
     val vm:AllNewsViewModel = hiltViewModel()
 
     //will only launch once

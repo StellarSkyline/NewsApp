@@ -29,9 +29,9 @@ import com.example.newsapp.viewmodel.AllNewsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 
-@Preview
+
 @Composable
-fun HomeScreen(navController: NavController = rememberNavController()) {
+fun HomeScreen(navController: NavController) {
     val context = LocalContext.current
 
 
@@ -74,7 +74,7 @@ fun HomeScreen(navController: NavController = rememberNavController()) {
             text = "All News Fragment",
             modifier = Modifier
                 .layoutId("btn_next")
-                .padding(top = 32.dp),
+                .padding(top = 32.dp, start = 16.dp, end = 16.dp),
             onClick = { navController.navigate(Screen.AllNewsScreen.route) }
         )
     }
@@ -100,7 +100,7 @@ fun button(text:String, modifier: Modifier, onClick: () -> Unit) {
 
         ) {
         Text(text = text,
-            fontSize = 10.sp
+            fontSize = 20.sp
         )
 
     }
