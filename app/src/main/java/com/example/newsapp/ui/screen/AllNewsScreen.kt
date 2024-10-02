@@ -11,6 +11,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -43,8 +46,9 @@ fun AllNewsScreen(navController: NavController) {
         vm.getAllNews()
     }
 
-
     val list = vm.allNews.observeAsState().value
+
+    if(isSpinnerVisible) IncludeSpinner(modifier = Modifier.layoutId("include_spinner"))
 
     val constraints = ConstraintSet {
         val tv_title = createRefFor("tv_title")
@@ -90,32 +94,22 @@ fun AllNewsScreen(navController: NavController) {
             fontSize = 30.sp,
             color = Color.Blue)
 
-        Column(
+        LazyColumn(
             modifier = Modifier
                 .layoutId("rv_list")
                 .padding(top = 32.dp)
         ) {
-
-            if(!list.isNullOrEmpty()) {
-                isSpinnerVisible = false
-                for(i in list) {
-                    Text(text = i.title,
-                        modifier = Modifier
-                            .padding(start = 16.dp, end = 16.dp)
-                            .clickable {
-                                Log.d("STLog", "I was clicked: ${i.title}")
-                            })
-
-                    Spacer(modifier = Modifier.padding(top = 16.dp))
-                }
+            if(!list.isNullOrEmpty()) isSpinnerVisible = false
+            items(list ?: emptyList()) { item ->
+                Text(text = item.title, modifier = Modifier
+                    .padding(start = 16.dp, end = 16.dp)
+                    .clickable {
+                        Log.d("STLog", "I was clicked: ${item.title}")
+                    })
+                Divider(modifier = Modifier.padding(top = 16.dp))
             }
 
-
         }
-
-        if(isSpinnerVisible) IncludeSpinner(modifier = Modifier.layoutId("include_spinner"))
-
-
     }
 }
 

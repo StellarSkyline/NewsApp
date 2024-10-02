@@ -23,11 +23,6 @@ class AllNewsViewModel @Inject constructor(
 ) : ViewModel() {
     val allNews = MutableLiveData<List<DataItem>>()
 
-//    init{
-//        Log.d("STLog", "Calling from app in VM: ${app.getString(R.string.app_name)}")
-//        getAllNews()
-//    }
-
     fun getAllNews() {
         viewModelScope.launch { allNews.value = repo.getAllNews().also { Log.d("STLog", "I'm Called") } }
     }
