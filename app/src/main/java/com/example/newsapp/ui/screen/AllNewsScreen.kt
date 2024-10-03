@@ -48,8 +48,6 @@ fun AllNewsScreen(navController: NavController) {
 
     val list = vm.allNews.observeAsState().value
 
-    if(isSpinnerVisible) IncludeSpinner(modifier = Modifier.layoutId("include_spinner"))
-
     val constraints = ConstraintSet {
         val tv_title = createRefFor("tv_title")
         val rv_list = createRefFor("rv_list")
@@ -110,6 +108,7 @@ fun AllNewsScreen(navController: NavController) {
             }
 
         }
+        if(isSpinnerVisible) IncludeSpinner(modifier = Modifier.layoutId("include_spinner"))
     }
 }
 
