@@ -28,7 +28,8 @@ class AllNewsViewModel @Inject constructor(
         viewModelScope.launch { allNews.value = repo.getAllNews().also { Log.d("STLog", "I'm Called") } }
     }
 
-//   fun setNewsURL(url:String){
-//       newsURL.value = url
-//   }
+    override fun onCleared() {
+        super.onCleared()
+        Log.d("STLog", "ViewModel cleared")
+    }
 }

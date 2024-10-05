@@ -39,7 +39,6 @@ import com.example.newsapp.viewmodel.AllNewsViewModel
 
 @Composable
 fun AllNewsScreen(navController: NavController, vm:AllNewsViewModel) {
-    //val vm:AllNewsViewModel = hiltViewModel()
     var isSpinnerVisible:Boolean by remember {
         mutableStateOf(true)
     }
@@ -127,7 +126,11 @@ fun AllNewsScreen(navController: NavController, vm:AllNewsViewModel) {
                 .padding(top = 32.dp),
 
             onClick = {
-                navController.navigate(Screen.HomeScreen.route)
+                navController.navigate(Screen.HomeScreen.route) {
+                    popUpTo(Screen.HomeScreen.route) {
+                        inclusive = true
+                    }
+                }
             }
         ) {
             Text(text = "Back")

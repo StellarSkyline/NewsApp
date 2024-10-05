@@ -15,6 +15,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
+import com.example.newsapp.extension.sharedViewModel
 import com.example.newsapp.ui.screen.AllNewsScreen
 import com.example.newsapp.ui.screen.HomeScreen
 import com.example.newsapp.ui.screen.NewsDetailsScreen
@@ -30,14 +31,14 @@ fun AppNavigation() {
             HomeScreen(navController)
         }
 
+        //Seperate Nav Graph to share VM between All News and All news Details
         navigation(startDestination = Screen.AllNewsScreen.route, route = Screen.AllNewsGraph.route) {
             composable(Screen.AllNewsScreen.route) { entry ->
-                val viewModel:AllNewsViewModel = hiltViewModel(entry)
+                val viewModel = entry.sharedViewModel<AllNewsViewModel>(navController)
                 AllNewsScreen(navController, viewModel)
             }
             composable(Screen.NewsDetailsScreen.route) { entry ->
-                val viewModel:AllNewsViewModel = if(navController.previousBackStackEntry != null) hiltViewModel(navController.previousBackStackEntry!!)
-                else hiltViewModel(entry)
+                val viewModel = entry.sharedViewModel<AllNewsViewModel>(navController)
                 NewsDetailsScreen(navController, viewModel)
             }
 
@@ -45,14 +46,3 @@ fun AppNavigation() {
     } )
 }
 
-//Extension function for shared view model
-@Composable
-inline fun <reified T : ViewModel> NavBackStackEntry.sharedViewModel(
-    navController: NavHostController,
-): T {
-    val navGraphRoute = destination.parent?.route ?: return viewModel()
-    val parentEntry = remember(this) {
-        navController.getBackStackEntry(navGraphRoute)
-    }
-    return viewModel(parentEntry)
-}
