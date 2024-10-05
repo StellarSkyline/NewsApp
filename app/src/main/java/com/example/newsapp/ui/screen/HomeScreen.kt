@@ -69,7 +69,7 @@ fun HomeScreen(navController: NavController) {
             modifier = Modifier
                 .layoutId("btn_next")
                 .padding(top = 32.dp, start = 16.dp, end = 16.dp),
-            onClick = { navController.navigate(Screen.AllNewsScreen.route) }
+            onClick = { navController.navigate(Screen.AllNewsGraph.route) }
         )
     }
 

@@ -22,8 +22,13 @@ class AllNewsViewModel @Inject constructor(
     private val app: Application
 ) : ViewModel() {
     val allNews = MutableLiveData<List<DataItem>>()
+    val newsURL = MutableLiveData<String>()
 
     fun getAllNews() {
         viewModelScope.launch { allNews.value = repo.getAllNews().also { Log.d("STLog", "I'm Called") } }
     }
+
+//   fun setNewsURL(url:String){
+//       newsURL.value = url
+//   }
 }

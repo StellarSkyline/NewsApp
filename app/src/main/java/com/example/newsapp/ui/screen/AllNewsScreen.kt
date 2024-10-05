@@ -5,6 +5,7 @@
 package com.example.newsapp.ui.screen
 
 import android.util.Log
+import android.webkit.WebView
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -13,6 +14,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -32,11 +34,12 @@ import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.newsapp.ui.navigation.Screen
 import com.example.newsapp.viewmodel.AllNewsViewModel
 
 @Composable
-fun AllNewsScreen(navController: NavController) {
-    val vm:AllNewsViewModel = hiltViewModel()
+fun AllNewsScreen(navController: NavController, vm:AllNewsViewModel) {
+    //val vm:AllNewsViewModel = hiltViewModel()
     var isSpinnerVisible:Boolean by remember {
         mutableStateOf(true)
     }
@@ -51,7 +54,8 @@ fun AllNewsScreen(navController: NavController) {
     val constraints = ConstraintSet {
         val tv_title = createRefFor("tv_title")
         val rv_list = createRefFor("rv_list")
-        var include_spinner = createRefFor("include_spinner")
+        val include_spinner = createRefFor("include_spinner")
+        val btn_back = createRefFor("btn_back")
 
         constrain(tv_title) {
             top.linkTo(parent.top)
@@ -64,9 +68,8 @@ fun AllNewsScreen(navController: NavController) {
             top.linkTo(tv_title.bottom)
             start.linkTo(parent.start)
             end.linkTo(parent.end)
-            bottom.linkTo(parent.bottom)
             width = Dimension.fillToConstraints
-            height = Dimension.fillToConstraints
+            height = Dimension.wrapContent
         }
 
         constrain(include_spinner) {
@@ -74,6 +77,14 @@ fun AllNewsScreen(navController: NavController) {
             start.linkTo(parent.start)
             end.linkTo(parent.end)
             bottom.linkTo(parent.bottom)
+        }
+
+        constrain(btn_back) {
+            top.linkTo(rv_list.bottom)
+            start.linkTo(parent.start)
+            end.linkTo(parent.end)
+            width = Dimension.value(300.dp)
+            height = Dimension.value(70.dp)
         }
     }
 
@@ -102,14 +113,26 @@ fun AllNewsScreen(navController: NavController) {
                 Text(text = item.title, modifier = Modifier
                     .padding(start = 16.dp, end = 16.dp)
                     .clickable {
-                        Log.d("STLog", "I was clicked: ${item.title}")
+                        vm.newsURL.value = item.url
+                        navController.navigate(Screen.NewsDetailsScreen.route)
                     })
                 Divider(modifier = Modifier.padding(top = 16.dp))
             }
 
         }
+
+        Button(
+            modifier = Modifier
+                .layoutId("btn_back")
+                .padding(top = 32.dp),
+
+            onClick = {
+                navController.navigate(Screen.HomeScreen.route)
+            }
+        ) {
+            Text(text = "Back")
+        }
         if(isSpinnerVisible) IncludeSpinner(modifier = Modifier.layoutId("include_spinner"))
     }
 }
-
 
