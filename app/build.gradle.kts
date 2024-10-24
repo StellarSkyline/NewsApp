@@ -93,6 +93,9 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.5")
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
+    //Extended Icons
+    implementation("androidx.compose.material:material-icons-extended-android:1.7.4")
+
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

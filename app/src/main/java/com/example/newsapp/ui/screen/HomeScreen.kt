@@ -32,12 +32,12 @@ fun HomeScreen(navController: NavController = NavController(LocalContext.current
         val btn_next = createRefFor("btn_next")
 
         constrain(tv_title) {
-            top.linkTo(parent.top)
+            top.linkTo(parent.top, 30.dp)
             start.linkTo(parent.start)
             end.linkTo(parent.end)
-            bottom.linkTo(parent.bottom)
             width = Dimension.fillToConstraints
             height = Dimension.wrapContent
+
         }
 
         constrain(btn_next) {
@@ -58,7 +58,7 @@ fun HomeScreen(navController: NavController = NavController(LocalContext.current
             .background(Color.White)) {
 
         titleText(
-            title = "NewsApp Home Screen",
+            title = "Home Screen",
             modifier = Modifier.layoutId("tv_title"))
 
         button(

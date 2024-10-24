@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
                Scaffold(
                    topBar = {
                        TopAppBar(
-                           title = { Text(text = "News App", fontSize = 16.sp, color = Color.White) },
+                           title = { Text(text = "Seth App", fontSize = 16.sp, color = Color.White) },
                            colors = TopAppBarDefaults.topAppBarColors(Color.Gray)
                        )
                    },
