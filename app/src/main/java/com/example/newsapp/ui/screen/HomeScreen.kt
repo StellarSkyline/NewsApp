@@ -15,6 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -25,11 +26,7 @@ import com.example.newsapp.ui.navigation.Screen
 
 
 @Composable
-fun HomeScreen(navController: NavController) {
-    val context = LocalContext.current
-
-
-
+fun HomeScreen(navController: NavController = NavController(LocalContext.current)) {
     val constraints =  ConstraintSet {
         val tv_title = createRefFor("tv_title")
         val btn_next = createRefFor("btn_next")
@@ -61,11 +58,11 @@ fun HomeScreen(navController: NavController) {
             .background(Color.White)) {
 
         titleText(
-            title = "Home Fragment Title",
+            title = "NewsApp Home Screen",
             modifier = Modifier.layoutId("tv_title"))
 
         button(
-            text = "All News Fragment",
+            text = "All News Screen",
             modifier = Modifier
                 .layoutId("btn_next")
                 .padding(top = 32.dp, start = 16.dp, end = 16.dp),
@@ -98,4 +95,10 @@ fun button(text:String, modifier: Modifier, onClick: () -> Unit) {
         )
 
     }
+}
+
+@Composable
+@Preview
+fun HomeScreenPreview() {
+    HomeScreen()
 }

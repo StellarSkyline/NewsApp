@@ -4,8 +4,10 @@
 
 package com.example.newsapp.ui.navigation
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -22,7 +24,7 @@ import com.example.newsapp.ui.screen.NewsDetailsScreen
 import com.example.newsapp.viewmodel.AllNewsViewModel
 
 @Composable
-fun AppNavigation() {
+fun AppNavigation(paddingValues:PaddingValues) {
     //Navigation
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = Screen.HomeScreen.route, builder = {

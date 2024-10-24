@@ -92,18 +92,15 @@ fun NewsDetailsScreen(navController: NavController, vm:AllNewsViewModel){
 fun LoadWebView(url:String,modifier: Modifier = Modifier) {
     AndroidView(
         modifier = modifier,
-        factory = { context ->
-            WebView(context).apply {
-                settings.javaScriptEnabled = true
-                webViewClient = WebViewClient()
-
-                settings.loadWithOverviewMode = true
-                settings.useWideViewPort = true
-                settings.setSupportZoom(true)
-            }
-        },
-        update = { webView ->
-            webView.loadUrl(url)
-        }
+        factory = { context -> WebView(context) },
+        update = { webView -> webView.loadUrl(url) }
     )
 }
+
+
+//                settings.javaScriptEnabled = true
+//                webViewClient = WebViewClient()
+//
+//                settings.loadWithOverviewMode = true
+//                settings.useWideViewPort = true
+//                settings.setSupportZoom(true)
