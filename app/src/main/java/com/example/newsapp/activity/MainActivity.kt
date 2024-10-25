@@ -30,14 +30,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent {
            MaterialTheme {
-               Scaffold(
-                   topBar = {
-                       TopAppBar(
-                           title = { Text(text = "Seth App", fontSize = 16.sp, color = Color.White) },
-                           colors = TopAppBarDefaults.topAppBarColors(Color.Gray)
-                       )
-                   },
-               ) { paddingValues ->
+               Scaffold { paddingValues ->
                    AppNavigation(paddingValues)
                }
            }

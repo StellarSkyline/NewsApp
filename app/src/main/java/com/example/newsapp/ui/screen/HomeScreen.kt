@@ -5,8 +5,14 @@
 package com.example.newsapp.ui.screen
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ConnectedTv
+import androidx.compose.material.icons.filled.ImageSearch
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,6 +28,8 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import androidx.navigation.NavController
+import com.example.newsapp.data.HomeItem
+import com.example.newsapp.ui.components.GridItem
 import com.example.newsapp.ui.navigation.Screen
 
 
@@ -30,9 +38,10 @@ fun HomeScreen(navController: NavController = NavController(LocalContext.current
     val constraints =  ConstraintSet {
         val tv_title = createRefFor("tv_title")
         val btn_next = createRefFor("btn_next")
+        val grid_layout = createRefFor("grid_layout")
 
         constrain(tv_title) {
-            top.linkTo(parent.top, 30.dp)
+            top.linkTo(parent.top)
             start.linkTo(parent.start)
             end.linkTo(parent.end)
             width = Dimension.fillToConstraints
@@ -40,16 +49,22 @@ fun HomeScreen(navController: NavController = NavController(LocalContext.current
 
         }
 
-        constrain(btn_next) {
-            top.linkTo(tv_title.bottom)
-            start.linkTo(parent.start)
-            end.linkTo(parent.end)
+        constrain(grid_layout) {
+            top.linkTo(tv_title.bottom, 16.dp)
+            start.linkTo(parent.start, 8.dp)
+            end.linkTo(parent.end, 8.dp)
             width = Dimension.fillToConstraints
             height = Dimension.wrapContent
-
-
         }
+
     }
+
+    val homeList = mutableListOf<HomeItem>()
+    homeList.add(HomeItem("News API", Icons.Default.ConnectedTv, Screen.AllNewsGraph.route))
+    homeList.add(HomeItem("Photos API", Icons.Default.ImageSearch))
+    homeList.add(HomeItem("Test Tile"))
+
+    
 
     ConstraintLayout(
         constraintSet = constraints,
@@ -61,13 +76,17 @@ fun HomeScreen(navController: NavController = NavController(LocalContext.current
             title = "Home Screen",
             modifier = Modifier.layoutId("tv_title"))
 
-        button(
-            text = "All News Screen",
-            modifier = Modifier
-                .layoutId("btn_next")
-                .padding(top = 32.dp, start = 16.dp, end = 16.dp),
-            onClick = { navController.navigate(Screen.AllNewsGraph.route) }
-        )
+        LazyVerticalGrid(
+            modifier = Modifier.layoutId("grid_layout"),
+            columns = GridCells.Fixed(3),
+            horizontalArrangement = Arrangement.spacedBy(32.dp),
+        ) {
+            items(homeList.size) {
+                GridItem(homeItem = homeList[it]) {
+                    if(homeList[it].route.isNotEmpty()) navController.navigate(homeList[it].route)
+                }
+            }
+        }
     }
 
 }
@@ -77,7 +96,7 @@ fun titleText(title:String, modifier: Modifier) {
     Text(
         text = title,
         fontSize = 30.sp,
-        color = Color.Blue,
+        color = Color.DarkGray,
         textAlign = TextAlign.Center,
         modifier = modifier
     )
