@@ -27,6 +27,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.layoutId
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -34,6 +37,9 @@ import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.newsapp.domain.repo.AllNewsRepo
+import com.example.newsapp.ui.components.CustomButton
+import com.example.newsapp.ui.components.ListItem
 import com.example.newsapp.ui.navigation.Screen
 import com.example.newsapp.viewmodel.AllNewsViewModel
 
@@ -79,11 +85,11 @@ fun AllNewsScreen(navController: NavController, vm:AllNewsViewModel) {
         }
 
         constrain(btn_back) {
-            top.linkTo(rv_list.bottom)
+            top.linkTo(rv_list.bottom, 32.dp)
             start.linkTo(parent.start)
             end.linkTo(parent.end)
-            width = Dimension.value(300.dp)
-            height = Dimension.value(70.dp)
+            width = Dimension.wrapContent
+            height = Dimension.wrapContent
         }
     }
 
@@ -94,13 +100,13 @@ fun AllNewsScreen(navController: NavController, vm:AllNewsViewModel) {
             .background(Color.White)
     ) {
 
-        Text(modifier =
-        Modifier
-            .layoutId("tv_title")
-            .padding(top = 32.dp),
-            text = "All News Screen",
+        Text(
+            modifier = Modifier.layoutId("tv_title"),
+            text = "All News API",
             fontSize = 30.sp,
-            color = Color.Blue)
+            color = Color.DarkGray,
+            textAlign = TextAlign.Center
+        )
 
         LazyColumn(
             modifier = Modifier
@@ -109,33 +115,25 @@ fun AllNewsScreen(navController: NavController, vm:AllNewsViewModel) {
         ) {
             if(!list.isNullOrEmpty()) isSpinnerVisible = false
             items(list ?: emptyList()) { item ->
-                Text(text = item.title, modifier = Modifier
-                    .padding(start = 16.dp, end = 16.dp)
-                    .clickable {
-                        vm.newsURL.value = item.url
-                        navController.navigate(Screen.NewsDetailsScreen.route)
-                    })
-                Divider(modifier = Modifier.padding(top = 16.dp))
-            }
-
-        }
-
-        Button(
-            modifier = Modifier
-                .layoutId("btn_back")
-                .padding(top = 32.dp),
-
-            onClick = {
-                navController.navigate(Screen.HomeScreen.route) {
-                    popUpTo(Screen.HomeScreen.route) {
-                        inclusive = true
-                    }
+                ListItem(modifier = Modifier, item = item) {
+                    vm.newsURL.value = item.url
+                    navController.navigate(Screen.NewsDetailsScreen.route)
                 }
             }
-        ) {
-            Text(text = "Back")
+
         }
+
+        CustomButton(
+            modifier = Modifier.layoutId("btn_back"),
+            title = "Back"
+        ) {
+            navController.navigate(Screen.HomeScreen.route) {
+                popUpTo(Screen.HomeScreen.route) {
+                    inclusive = true
+                }
+            }
+        }
+
         if(isSpinnerVisible) IncludeSpinner(modifier = Modifier.layoutId("include_spinner"))
     }
 }
-

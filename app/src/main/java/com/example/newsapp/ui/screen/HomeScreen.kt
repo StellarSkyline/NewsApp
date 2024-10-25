@@ -7,13 +7,11 @@ package com.example.newsapp.ui.screen
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ConnectedTv
 import androidx.compose.material.icons.filled.ImageSearch
-import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -34,10 +32,9 @@ import com.example.newsapp.ui.navigation.Screen
 
 
 @Composable
-fun HomeScreen(navController: NavController = NavController(LocalContext.current)) {
+fun HomeScreen(navController: NavController) {
     val constraints =  ConstraintSet {
         val tv_title = createRefFor("tv_title")
-        val btn_next = createRefFor("btn_next")
         val grid_layout = createRefFor("grid_layout")
 
         constrain(tv_title) {
@@ -72,9 +69,13 @@ fun HomeScreen(navController: NavController = NavController(LocalContext.current
             .fillMaxSize()
             .background(Color.White)) {
 
-        titleText(
-            title = "Home Screen",
-            modifier = Modifier.layoutId("tv_title"))
+        Text(
+            modifier = Modifier.layoutId("tv_title"),
+            text = "Home Screen",
+            fontSize = 30.sp,
+            color = Color.DarkGray,
+            textAlign = TextAlign.Center
+        )
 
         LazyVerticalGrid(
             modifier = Modifier.layoutId("grid_layout"),
@@ -92,32 +93,7 @@ fun HomeScreen(navController: NavController = NavController(LocalContext.current
 }
 
 @Composable
-fun titleText(title:String, modifier: Modifier) {
-    Text(
-        text = title,
-        fontSize = 30.sp,
-        color = Color.DarkGray,
-        textAlign = TextAlign.Center,
-        modifier = modifier
-    )
-}
-
-@Composable
-fun button(text:String, modifier: Modifier, onClick: () -> Unit) {
-    Button(
-        modifier = modifier,
-        onClick = onClick,
-
-        ) {
-        Text(text = text,
-            fontSize = 20.sp
-        )
-
-    }
-}
-
-@Composable
 @Preview
 fun HomeScreenPreview() {
-    HomeScreen()
+    HomeScreen(navController = NavController(LocalContext.current))
 }
