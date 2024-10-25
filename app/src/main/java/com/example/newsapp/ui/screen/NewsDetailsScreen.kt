@@ -30,6 +30,8 @@ import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.newsapp.ui.components.CustomButton
+import com.example.newsapp.ui.components.LoadWebView
 import com.example.newsapp.ui.navigation.Screen
 import com.example.newsapp.viewmodel.AllNewsViewModel
 import javax.inject.Inject
@@ -37,7 +39,6 @@ import javax.inject.Inject
 @Composable
 fun NewsDetailsScreen(navController: NavController, vm:AllNewsViewModel){
     val url= vm.newsURL.observeAsState().value
-
 
     val constrains = ConstraintSet {
         val btn_back = createRefFor("btn_back")
@@ -51,7 +52,6 @@ fun NewsDetailsScreen(navController: NavController, vm:AllNewsViewModel){
             height = Dimension.wrapContent
 
         }
-
         constrain(btn_back){
             start.linkTo(parent.start)
             end.linkTo(parent.end)
@@ -65,42 +65,16 @@ fun NewsDetailsScreen(navController: NavController, vm:AllNewsViewModel){
         constraintSet = constrains,
         modifier = Modifier.fillMaxSize()) {
 
-        Button(
+        CustomButton(
             modifier = Modifier
                 .layoutId("btn_back"),
-            onClick = { navController.navigate(Screen.AllNewsScreen.route) }
+            title = "Back"
         ) {
-            Text(text = "Back")
+            navController.navigate(Screen.AllNewsScreen.route)
         }
-
         LoadWebView(
             url = url.toString(),
             modifier = Modifier
             .layoutId("wv_news"))
-
     }
-
-//    Column(modifier = Modifier
-//        .fillMaxSize()){
-//
-//        if(url.isNullOrEmpty()) Box{}
-//        else Log.d("STLog", "URL: $url")
-//    }
 }
-
-@Composable
-fun LoadWebView(url:String,modifier: Modifier = Modifier) {
-    AndroidView(
-        modifier = modifier,
-        factory = { context -> WebView(context) },
-        update = { webView -> webView.loadUrl(url) }
-    )
-}
-
-
-//                settings.javaScriptEnabled = true
-//                webViewClient = WebViewClient()
-//
-//                settings.loadWithOverviewMode = true
-//                settings.useWideViewPort = true
-//                settings.setSupportZoom(true)

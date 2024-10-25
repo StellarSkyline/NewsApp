@@ -18,6 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -36,7 +37,7 @@ fun GridItem(homeItem: HomeItem = HomeItem(), onClick: () -> Unit = {}) {
             modifier = Modifier
                 .fillMaxSize()
                 .clickable { onClick() }
-                .background(Color.Gray),
+                .background(Color.DarkGray),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -44,9 +45,12 @@ fun GridItem(homeItem: HomeItem = HomeItem(), onClick: () -> Unit = {}) {
             Image(
                 modifier = Modifier.size(70.dp),
                 imageVector = homeItem.image,
-                contentDescription = "Image icon"
+                contentDescription = "Image icon",
+                colorFilter = ColorFilter.tint(Color.White)
             )
-            Text(text = homeItem.title, fontSize = 16.sp)
+            Text(text = homeItem.title,
+                fontSize = 16.sp,
+                color = Color.White)
 
         }
 
