@@ -16,3 +16,6 @@
 local.properties
 ApiKey.kt
 app/src/main/java/com/example/newsapp/Data/ApiKey.kt
+.idea/compiler.xml
+.idea/compiler.xml
+.idea/gradle.xml

@@ -45,8 +45,8 @@ fun NewsDetailsScreen(navController: NavController, vm:AllNewsViewModel){
         val wv_news = createRefFor("wv_news")
         constrain(wv_news) {
             top.linkTo(parent.top)
-            start.linkTo(parent.start)
-            end.linkTo(parent.end)
+            start.linkTo(parent.start, 8.dp)
+            end.linkTo(parent.end, 8.dp)
             bottom.linkTo(btn_back.top, margin = 95.dp)
             width = Dimension.fillToConstraints
             height = Dimension.wrapContent

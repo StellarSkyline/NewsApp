@@ -4,11 +4,16 @@
 
 package com.example.newsapp.di
 
+import android.util.Log
 import com.example.newsapp.data.BaseValues
 import com.example.newsapp.data.repo.AllNewsRepoImpl
+import com.example.newsapp.data.repo.PhotosRepoImpl
 import com.example.newsapp.domain.MyAPI
-import com.example.newsapp.domain.NetworkHelper.interceptor
+import com.example.newsapp.domain.NetworkHelper.newsInterceptor
+import com.example.newsapp.domain.NetworkHelper.photosInterceptor
+import com.example.newsapp.domain.PexelAPI
 import com.example.newsapp.domain.repo.AllNewsRepo
+import com.example.newsapp.domain.repo.PhotosRepo
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
@@ -27,15 +32,31 @@ object AppModule {
     @Singleton
     fun providesMyApi(): MyAPI {
         return Retrofit.Builder()
-            .baseUrl(BaseValues.baseURL)
+            .baseUrl(BaseValues.newsUrl)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
-            .client(interceptor)
+            .client(newsInterceptor)
             .build()
             .create(MyAPI::class.java)
     }
 
     @Provides
     @Singleton
+    fun providesPhotosRepoAPI(): PexelAPI {
+        return Retrofit.Builder()
+            .baseUrl(BaseValues.pexelUrl)
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(CoroutineCallAdapterFactory())
+            .client(photosInterceptor)
+            .build()
+            .create(PexelAPI::class.java)
+    }
+
+    @Provides
+    @Singleton
     fun providesAllNewsRepo(api: MyAPI): AllNewsRepo = AllNewsRepoImpl(api)
+
+    @Provides
+    @Singleton
+    fun providesPhotosRepo(api: PexelAPI ): PhotosRepo = PhotosRepoImpl(api)
 }

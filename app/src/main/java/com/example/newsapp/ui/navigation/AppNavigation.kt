@@ -21,6 +21,7 @@ import com.example.newsapp.extension.sharedViewModel
 import com.example.newsapp.ui.screen.AllNewsScreen
 import com.example.newsapp.ui.screen.HomeScreen
 import com.example.newsapp.ui.screen.NewsDetailsScreen
+import com.example.newsapp.ui.screen.PhotosScreen
 import com.example.newsapp.viewmodel.AllNewsViewModel
 
 @Composable
@@ -44,6 +45,11 @@ fun AppNavigation(paddingValues:PaddingValues) {
                 NewsDetailsScreen(navController, viewModel)
             }
 
+        }
+
+
+        composable(Screen.PhotosScreen.route) {
+            PhotosScreen(navController)
         }
     } )
 }

@@ -5,5 +5,6 @@
 package com.example.newsapp.data
 
 object BaseValues {
-    val baseURL = "https://api.thenewsapi.com/v1/news/"
+    val newsUrl = "https://api.thenewsapi.com/v1/news/"
+    val pexelUrl = "https://api.pexels.com/v1/"
 }
