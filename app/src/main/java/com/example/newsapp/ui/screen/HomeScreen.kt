@@ -32,7 +32,7 @@ import com.example.newsapp.ui.navigation.Screen
 
 
 @Composable
-fun HomeScreen(navController: NavController) {
+fun HomeScreen(onNavigate: (String) -> Unit = {}) {
     val constraints =  ConstraintSet {
         val tv_title = createRefFor("tv_title")
         val grid_layout = createRefFor("grid_layout")
@@ -84,7 +84,7 @@ fun HomeScreen(navController: NavController) {
         ) {
             items(homeList.size) {
                 GridItem(homeItem = homeList[it]) {
-                    if(homeList[it].route.isNotEmpty()) navController.navigate(homeList[it].route)
+                    if(homeList[it].route.isNotEmpty()) onNavigate(homeList[it].route)
                 }
             }
         }
@@ -95,5 +95,5 @@ fun HomeScreen(navController: NavController) {
 @Composable
 @Preview
 fun HomeScreenPreview() {
-    HomeScreen(navController = NavController(LocalContext.current))
+    HomeScreen()
 }

@@ -44,7 +44,7 @@ import com.example.newsapp.ui.navigation.Screen
 import com.example.newsapp.viewmodel.AllNewsViewModel
 
 @Composable
-fun AllNewsScreen(navController: NavController, vm:AllNewsViewModel) {
+fun AllNewsScreen(vm:AllNewsViewModel, onNavigate:(String) -> Unit = {}) {
     var isSpinnerVisible:Boolean by remember {
         mutableStateOf(true)
     }
@@ -66,6 +66,8 @@ fun AllNewsScreen(navController: NavController, vm:AllNewsViewModel) {
             top.linkTo(parent.top)
             start.linkTo(parent.start)
             end.linkTo(parent.end)
+            width = Dimension.fillToConstraints
+            height = Dimension.wrapContent
 
         }
 
@@ -73,8 +75,7 @@ fun AllNewsScreen(navController: NavController, vm:AllNewsViewModel) {
             top.linkTo(tv_title.bottom)
             start.linkTo(parent.start)
             end.linkTo(parent.end)
-            width = Dimension.fillToConstraints
-            height = Dimension.wrapContent
+
         }
 
         constrain(include_spinner) {
@@ -117,7 +118,7 @@ fun AllNewsScreen(navController: NavController, vm:AllNewsViewModel) {
             items(list ?: emptyList()) { item ->
                 ListItem(modifier = Modifier, item = item) {
                     vm.newsURL.value = item.url
-                    navController.navigate(Screen.NewsDetailsScreen.route)
+                    onNavigate(Screen.NewsDetailsScreen.route)
                 }
             }
 
@@ -127,11 +128,7 @@ fun AllNewsScreen(navController: NavController, vm:AllNewsViewModel) {
             modifier = Modifier.layoutId("btn_back"),
             title = "Back"
         ) {
-            navController.navigate(Screen.HomeScreen.route) {
-                popUpTo(Screen.HomeScreen.route) {
-                    inclusive = true
-                }
-            }
+            onNavigate(Screen.HomeScreen.route)
         }
 
         if(isSpinnerVisible) IncludeSpinner(modifier = Modifier.layoutId("include_spinner"))

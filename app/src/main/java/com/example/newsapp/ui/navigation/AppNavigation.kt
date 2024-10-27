@@ -7,6 +7,7 @@ package com.example.newsapp.ui.navigation
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.traceEventStart
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
@@ -31,25 +32,32 @@ fun AppNavigation(paddingValues:PaddingValues) {
     NavHost(navController = navController, startDestination = Screen.HomeScreen.route, builder = {
 
         composable(Screen.HomeScreen.route) {
-            HomeScreen(navController)
+            HomeScreen{ passedRoute ->
+                navController.navigate(passedRoute)
+            }
         }
 
         //Seperate Nav Graph to share VM between All News and All news Details
         navigation(startDestination = Screen.AllNewsScreen.route, route = Screen.AllNewsGraph.route) {
             composable(Screen.AllNewsScreen.route) { entry ->
                 val viewModel = entry.sharedViewModel<AllNewsViewModel>(navController)
-                AllNewsScreen(navController, viewModel)
+                AllNewsScreen(viewModel) { passedRoute ->
+                    navController.navigate(passedRoute)
+                }
             }
             composable(Screen.NewsDetailsScreen.route) { entry ->
                 val viewModel = entry.sharedViewModel<AllNewsViewModel>(navController)
-                NewsDetailsScreen(navController, viewModel)
+                NewsDetailsScreen(viewModel) { passedRoute ->
+                    navController.navigate(passedRoute)
+                }
             }
 
         }
 
-
         composable(Screen.PhotosScreen.route) {
-            PhotosScreen(navController)
+           PhotosScreen{ passedRoute ->
+               navController.navigate(passedRoute)
+           }
         }
     } )
 }
