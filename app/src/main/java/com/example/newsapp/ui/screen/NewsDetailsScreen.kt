@@ -56,8 +56,8 @@ fun NewsDetailsScreen(vm:AllNewsViewModel, onNavigate: (String) -> Unit = {}){
             start.linkTo(parent.start)
             end.linkTo(parent.end)
             bottom.linkTo(parent.bottom, margin = 16.dp)
-            width = Dimension.value(300.dp)
-            height = Dimension.value(70.dp)
+            width = Dimension.wrapContent
+            height = Dimension.wrapContent
         }
     }
 

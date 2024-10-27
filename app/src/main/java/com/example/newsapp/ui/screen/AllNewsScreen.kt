@@ -73,8 +73,11 @@ fun AllNewsScreen(vm:AllNewsViewModel, onNavigate:(String) -> Unit = {}) {
 
         constrain(rv_list) {
             top.linkTo(tv_title.bottom)
-            start.linkTo(parent.start)
-            end.linkTo(parent.end)
+            bottom.linkTo(btn_back.top, 16.dp)
+            start.linkTo(parent.start, 16.dp)
+            end.linkTo(parent.end, 16.dp)
+            width = Dimension.fillToConstraints
+            height = Dimension.fillToConstraints
 
         }
 
@@ -86,7 +89,7 @@ fun AllNewsScreen(vm:AllNewsViewModel, onNavigate:(String) -> Unit = {}) {
         }
 
         constrain(btn_back) {
-            top.linkTo(rv_list.bottom, 32.dp)
+            bottom.linkTo(parent.bottom, 16.dp)
             start.linkTo(parent.start)
             end.linkTo(parent.end)
             width = Dimension.wrapContent

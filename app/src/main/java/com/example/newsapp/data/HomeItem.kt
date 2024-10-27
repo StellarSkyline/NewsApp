@@ -12,5 +12,4 @@ data class HomeItem(
     val title: String = "Title",
     val image:ImageVector = Icons.Default.Home,
     val route:String = ""
-
 )

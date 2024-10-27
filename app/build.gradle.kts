@@ -58,6 +58,7 @@ dependencies {
 
     //Glide
     implementation("com.github.bumptech.glide:glide:4.15.1")
+    implementation("com.github.bumptech.glide:compose:1.0.0-beta01")
     implementation(libs.androidx.foundation.android)
     implementation(libs.androidx.material3.android)
     annotationProcessor("com.github.bumptech.glide:compiler:4.15.1")

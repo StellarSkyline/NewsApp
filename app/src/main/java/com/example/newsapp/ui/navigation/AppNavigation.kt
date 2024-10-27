@@ -6,14 +6,6 @@ package com.example.newsapp.ui.navigation
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.traceEventStart
-import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavBackStackEntry
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
@@ -36,7 +28,6 @@ fun AppNavigation(paddingValues:PaddingValues) {
                 navController.navigate(passedRoute)
             }
         }
-
         //Seperate Nav Graph to share VM between All News and All news Details
         navigation(startDestination = Screen.AllNewsScreen.route, route = Screen.AllNewsGraph.route) {
             composable(Screen.AllNewsScreen.route) { entry ->
@@ -51,9 +42,7 @@ fun AppNavigation(paddingValues:PaddingValues) {
                     navController.navigate(passedRoute)
                 }
             }
-
         }
-
         composable(Screen.PhotosScreen.route) {
            PhotosScreen{ passedRoute ->
                navController.navigate(passedRoute)

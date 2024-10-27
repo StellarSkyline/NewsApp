@@ -25,19 +25,20 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.newsapp.ui.components.CustomButton
+import com.example.newsapp.ui.components.PhotoGridItem
 import com.example.newsapp.ui.navigation.Screen
 import com.example.newsapp.viewmodel.PhotosViewModel
 
 @Composable
 fun PhotosScreen(onNavigate:(String) -> Unit = {}) {
     val vm = hiltViewModel<PhotosViewModel>()
-//    LaunchedEffect(Unit) {
-//        vm.getAllPhotos()
-//    }
-//
-//    val list = vm.allPhotos.observeAsState().value
-//
-//    Log.d("STLog", "Photos List from Screen: ${list}")
+    LaunchedEffect(Unit) {
+        vm.getAllPhotos()
+    }
+
+    val list = vm.allPhotos.observeAsState().value
+
+    Log.d("STLog", "Photos List from Screen: ${list}")
 
     //Set up constraint layout
     val constraints = ConstraintSet {
@@ -61,7 +62,7 @@ fun PhotosScreen(onNavigate:(String) -> Unit = {}) {
         }
 
         constrain(btn_back) {
-            bottom.linkTo(parent.bottom)
+            bottom.linkTo(parent.bottom, 16.dp)
             start.linkTo(parent.start, 16.dp)
             end.linkTo(parent.end, 16.dp)
             width = Dimension.wrapContent
@@ -70,6 +71,7 @@ fun PhotosScreen(onNavigate:(String) -> Unit = {}) {
     }
 
     ConstraintLayout(
+        constraintSet = constraints,
         modifier = Modifier.fillMaxSize()
     ) {
         Text(
@@ -79,6 +81,13 @@ fun PhotosScreen(onNavigate:(String) -> Unit = {}) {
             color = Color.DarkGray,
             textAlign = TextAlign.Center
         )
+
+        //Test
+//        if(!list.isNullOrEmpty()) {
+//            PhotoGridItem(
+//                imageUrl = list[0].src.medium
+//            )
+//        }
 
         CustomButton(modifier = Modifier
             .layoutId("btn_back"),
