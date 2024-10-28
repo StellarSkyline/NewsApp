@@ -39,6 +39,7 @@ fun AppNavigation(paddingValues: PaddingValues) {
             composable(Screen.AllNewsScreen.route) { entry ->
                 val viewModel = entry.sharedViewModel<AllNewsViewModel>(navController)
                 AllNewsScreen(viewModel) { passedRoute ->
+
                     navController.navigate(passedRoute)
                 }
             }
