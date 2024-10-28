@@ -5,7 +5,11 @@
 package com.example.newsapp.ui.screen
 
 import android.util.Log
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -59,6 +63,9 @@ fun PhotosScreen(onNavigate:(String) -> Unit = {}) {
             top.linkTo(tv_title.bottom)
             start.linkTo(parent.start, 16.dp)
             end.linkTo(parent.end, 16.dp)
+            bottom.linkTo(btn_back.top, 16.dp)
+            width = Dimension.fillToConstraints
+            height = Dimension.fillToConstraints
         }
 
         constrain(btn_back) {
@@ -72,23 +79,33 @@ fun PhotosScreen(onNavigate:(String) -> Unit = {}) {
 
     ConstraintLayout(
         constraintSet = constraints,
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.White)
     ) {
         Text(
             modifier = Modifier.layoutId("tv_title"),
-            text = "All News API",
+            text = "Pexel API",
             fontSize = 30.sp,
             color = Color.DarkGray,
             textAlign = TextAlign.Center
         )
 
-        //Test
-//        if(!list.isNullOrEmpty()) {
-//            PhotoGridItem(
-//                imageUrl = list[0].src.medium
-//            )
-//        }
+        LazyVerticalGrid(
+            modifier = Modifier.layoutId("rv_grid"),
+            columns = GridCells.Fixed(3),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            if(!list.isNullOrEmpty()) {
+                items(list.size) { photo ->
+                    PhotoGridItem(modifier = Modifier,imageUrl = list[photo].src.medium) {
+                        Log.d("STLog", "PhotoItem URL: ${list[photo].src.medium}")
+                    }
+                }
 
+            }
+        }
         CustomButton(modifier = Modifier
             .layoutId("btn_back"),
             title = "Back") {
