@@ -58,7 +58,7 @@ fun HomeScreen(onNavigate: (String) -> Unit = {}) {
 
     val homeList = mutableListOf<HomeItem>()
     homeList.add(HomeItem("News API", Icons.Default.ConnectedTv, Screen.AllNewsGraph.route))
-    homeList.add(HomeItem("Photos API", Icons.Default.ImageSearch, Screen.PhotosScreen.route))
+    homeList.add(HomeItem("Photos API", Icons.Default.ImageSearch, Screen.PhotosGraph.route))
     homeList.add(HomeItem("Test Tile"))
 
     

@@ -23,11 +23,18 @@ class PhotosViewModel @Inject constructor(
 ) : ViewModel() {
 
     val allPhotos = MutableLiveData<List<Photo>>()
+    val photo = MutableLiveData<Photo>()
 
     fun getAllPhotos() {
         viewModelScope.launch {
             allPhotos.value = repo.getPhotos()
         }
+    }
+
+
+    override fun onCleared() {
+        super.onCleared()
+        Log.d("STLog", "Photos ViewModel cleared")
     }
 
 

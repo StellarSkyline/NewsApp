@@ -45,9 +45,7 @@ import com.example.newsapp.viewmodel.AllNewsViewModel
 
 @Composable
 fun AllNewsScreen(vm:AllNewsViewModel, onNavigate:(String) -> Unit = {}) {
-    var isSpinnerVisible:Boolean by remember {
-        mutableStateOf(true)
-    }
+    var isSpinnerVisible:Boolean by remember { mutableStateOf(true) }
 
     //will only launch once
     LaunchedEffect(Unit) {

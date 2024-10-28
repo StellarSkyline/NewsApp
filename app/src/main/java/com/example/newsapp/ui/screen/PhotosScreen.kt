@@ -38,8 +38,7 @@ import com.example.newsapp.ui.navigation.Screen
 import com.example.newsapp.viewmodel.PhotosViewModel
 
 @Composable
-fun PhotosScreen(onNavigate:(String) -> Unit = {}) {
-    val vm = hiltViewModel<PhotosViewModel>()
+fun PhotosScreen(vm:PhotosViewModel, onNavigate:(String) -> Unit = {}) {
     LaunchedEffect(Unit) {
         vm.getAllPhotos()
     }
@@ -117,7 +116,8 @@ fun PhotosScreen(onNavigate:(String) -> Unit = {}) {
                 isSpinnerVisible = false
                 items(list.size) { photo ->
                     PhotoGridItem(modifier = Modifier,imageUrl = list[photo].src.medium) {
-                        Log.d("STLog", "PhotoItem URL: ${list[photo].src.medium}")
+                        vm.photo.value = list[photo]
+                        onNavigate(Screen.PhotoDetailsScreen.route)
                     }
                 }
 
@@ -131,10 +131,4 @@ fun PhotosScreen(onNavigate:(String) -> Unit = {}) {
 
         if(isSpinnerVisible) IncludeSpinner(modifier = Modifier.layoutId("include_spinner"))
     }
-}
-
-@Composable
-@Preview
-fun PhotosScreenPreview() {
-    PhotosScreen()
 }
