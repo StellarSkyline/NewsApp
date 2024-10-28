@@ -13,7 +13,11 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.layoutId
@@ -40,15 +44,18 @@ fun PhotosScreen(onNavigate:(String) -> Unit = {}) {
         vm.getAllPhotos()
     }
 
+    var isSpinnerVisible:Boolean by remember {
+        mutableStateOf(true)
+    }
     val list = vm.allPhotos.observeAsState().value
 
-    Log.d("STLog", "Photos List from Screen: ${list}")
 
     //Set up constraint layout
     val constraints = ConstraintSet {
         val rv_grid = createRefFor("rv_grid")
         val btn_back = createRefFor("btn_back")
         val tv_title = createRefFor("tv_title")
+        val include_spinner = createRefFor("include_spinner")
 
         constrain(tv_title) {
             top.linkTo(parent.top)
@@ -75,6 +82,15 @@ fun PhotosScreen(onNavigate:(String) -> Unit = {}) {
             width = Dimension.wrapContent
             height = Dimension.wrapContent
         }
+
+        constrain(include_spinner) {
+            top.linkTo(parent.top)
+            start.linkTo(parent.start)
+            end.linkTo(parent.end)
+            bottom.linkTo(parent.bottom)
+            width = Dimension.fillToConstraints
+            height = Dimension.fillToConstraints
+        }
     }
 
     ConstraintLayout(
@@ -98,6 +114,7 @@ fun PhotosScreen(onNavigate:(String) -> Unit = {}) {
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             if(!list.isNullOrEmpty()) {
+                isSpinnerVisible = false
                 items(list.size) { photo ->
                     PhotoGridItem(modifier = Modifier,imageUrl = list[photo].src.medium) {
                         Log.d("STLog", "PhotoItem URL: ${list[photo].src.medium}")
@@ -111,6 +128,8 @@ fun PhotosScreen(onNavigate:(String) -> Unit = {}) {
             title = "Back") {
             onNavigate(Screen.HomeScreen.route)
         }
+
+        if(isSpinnerVisible) IncludeSpinner(modifier = Modifier.layoutId("include_spinner"))
     }
 }
 
