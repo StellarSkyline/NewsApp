@@ -30,6 +30,7 @@ fun AppNavigation(paddingValues: PaddingValues) {
                 navController.navigate(passedRoute)
             }
         }
+
         //News Navigation Graph
         navigation(
             startDestination = Screen.AllNewsScreen.route,
@@ -50,7 +51,10 @@ fun AppNavigation(paddingValues: PaddingValues) {
         }
 
         //Photos Navigation Graph
-        navigation(startDestination = Screen.PhotosScreen.route, route = Screen.PhotosGraph.route) {
+        navigation(
+            startDestination = Screen.PhotosScreen.route,
+            route = Screen.PhotosGraph.route
+        ) {
 
             composable(Screen.PhotosScreen.route) { entry ->
                 val viewModel = entry.sharedViewModel<PhotosViewModel>(navController)
