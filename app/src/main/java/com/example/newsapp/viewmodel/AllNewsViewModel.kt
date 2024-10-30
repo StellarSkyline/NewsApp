@@ -32,16 +32,19 @@ class AllNewsViewModel @Inject constructor(
     fun getAllNews() {
         viewModelScope.launch(Dispatchers.IO) {
             val list:MutableList<NewsItems> = mutableListOf()
-            //allNews.value = repo.getAllNews().also { Log.d("STLog", "I'm Called") }
+
+            //Add each new item to DB
             repo.getAllNews().onEach {
                 repo.insertNews(title = it.title, url = it.url)
                 list.add(NewsItems(it.title, it.url))
             }
 
+            //Add each item from DB to list
             repo.getNewsDb().onEach {
                 list.add(NewsItems(it.title, it.url))
             }
 
+            //update State
             withContext(Dispatchers.Main) {
                 allNews.value = list
             }
