@@ -42,4 +42,8 @@ class AllNewsRepoImpl(
         return db.dao.getNewsOrderedByTitle()
     }
 
+    override suspend fun deleteAllNewsTable() {
+        db.dao.deleteAllNewsTable()
+    }
+
 }

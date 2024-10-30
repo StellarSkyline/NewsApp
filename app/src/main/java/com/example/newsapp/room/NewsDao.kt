@@ -21,6 +21,9 @@ interface NewsDao {
     @Delete
     suspend fun deleteNews(data:NewsEntity)
 
+    @Query("DELETE FROM newsentity")
+    fun deleteAllNewsTable()
+
     @Query("SELECT * FROM newsentity")
     fun getNewsOrderedByTitle(): List<NewsEntity>
 }

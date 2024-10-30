@@ -36,7 +36,6 @@ class AllNewsViewModel @Inject constructor(
             //Add each new item to DB
             repo.getAllNews().onEach {
                 repo.insertNews(title = it.title, url = it.url)
-                list.add(NewsItems(it.title, it.url))
             }
 
             //Add each item from DB to list
@@ -47,6 +46,15 @@ class AllNewsViewModel @Inject constructor(
             //update State
             withContext(Dispatchers.Main) {
                 allNews.value = list
+            }
+        }
+    }
+
+    fun deleteNewsTable() {
+        viewModelScope.launch(Dispatchers.IO) {
+            repo.deleteAllNewsTable()
+            withContext(Dispatchers.Main) {
+                allNews.value = emptyList()
             }
         }
     }

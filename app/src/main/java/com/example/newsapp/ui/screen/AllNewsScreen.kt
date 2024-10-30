@@ -59,6 +59,14 @@ fun AllNewsScreen(vm:AllNewsViewModel, onNavigate:(String) -> Unit = {}) {
         val rv_list = createRefFor("rv_list")
         val include_spinner = createRefFor("include_spinner")
         val btn_back = createRefFor("btn_back")
+        val btn_clear = createRefFor("btn_clear")
+
+        constrain(include_spinner) {
+            top.linkTo(parent.top)
+            start.linkTo(parent.start)
+            end.linkTo(parent.end)
+            bottom.linkTo(parent.bottom)
+        }
 
         constrain(tv_title) {
             top.linkTo(parent.top)
@@ -71,7 +79,7 @@ fun AllNewsScreen(vm:AllNewsViewModel, onNavigate:(String) -> Unit = {}) {
 
         constrain(rv_list) {
             top.linkTo(tv_title.bottom)
-            bottom.linkTo(btn_back.top, 16.dp)
+            bottom.linkTo(btn_clear.top, 16.dp)
             start.linkTo(parent.start, 16.dp)
             end.linkTo(parent.end, 16.dp)
             width = Dimension.fillToConstraints
@@ -79,12 +87,15 @@ fun AllNewsScreen(vm:AllNewsViewModel, onNavigate:(String) -> Unit = {}) {
 
         }
 
-        constrain(include_spinner) {
-            top.linkTo(parent.top)
+        constrain(btn_clear) {
+            bottom.linkTo(btn_back.top, 16.dp)
             start.linkTo(parent.start)
             end.linkTo(parent.end)
-            bottom.linkTo(parent.bottom)
+            width = Dimension.wrapContent
+            height = Dimension.wrapContent
         }
+
+
 
         constrain(btn_back) {
             bottom.linkTo(parent.bottom, 16.dp)
@@ -123,6 +134,13 @@ fun AllNewsScreen(vm:AllNewsViewModel, onNavigate:(String) -> Unit = {}) {
                 }
             }
 
+        }
+
+        CustomButton(
+            modifier = Modifier.layoutId("btn_clear"),
+            title = "Clear Database"
+        ) {
+            vm.deleteNewsTable()
         }
 
         CustomButton(

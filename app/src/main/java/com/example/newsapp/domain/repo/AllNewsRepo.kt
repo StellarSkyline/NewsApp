@@ -12,5 +12,6 @@ interface AllNewsRepo {
     suspend fun insertNews(title:String, url:String)
     suspend fun deleteNews(title:String, url:String)
     suspend fun getNewsDb(): List<NewsEntity>
+    suspend fun deleteAllNewsTable()
 
 }
