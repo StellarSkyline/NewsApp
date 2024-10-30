@@ -97,6 +97,10 @@ dependencies {
     //Extended Icons
     implementation("androidx.compose.material:material-icons-extended-android:1.7.4")
 
+    //RoomDB
+    implementation("androidx.room:room-ktx:2.6.1")
+    kapt("androidx.room:room-compiler:2.6.1")
+
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
