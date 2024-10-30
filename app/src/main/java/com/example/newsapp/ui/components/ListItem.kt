@@ -27,10 +27,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.newsapp.data.DataItem
+import com.example.newsapp.data.NewsItems
 
 @Composable
 @Preview
-fun ListItem(modifier: Modifier = Modifier, item: DataItem = DataItem(), onClick: () -> Unit = {}) {
+fun ListItem(modifier: Modifier = Modifier, item: NewsItems = NewsItems(), onClick: () -> Unit = {}) {
 
     Card(
         modifier = modifier

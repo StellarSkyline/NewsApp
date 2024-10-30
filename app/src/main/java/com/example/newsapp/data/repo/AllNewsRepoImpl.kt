@@ -39,7 +39,7 @@ class AllNewsRepoImpl(
     }
 
     override suspend fun getNewsDb(): List<NewsEntity> {
-        return db.dao.getNewsOrderedByTitle().value ?: emptyList()
+        return db.dao.getNewsOrderedByTitle()
     }
 
 }
