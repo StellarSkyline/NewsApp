@@ -133,7 +133,6 @@ fun AllNewsScreen(vm:AllNewsViewModel, onNavigate:(String) -> Unit = {}) {
                     onNavigate(Screen.NewsDetailsScreen.route)
                 }
             }
-
         }
 
         CustomButton(

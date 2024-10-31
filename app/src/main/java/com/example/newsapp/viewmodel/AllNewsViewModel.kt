@@ -28,7 +28,6 @@ class AllNewsViewModel @Inject constructor(
     val newsURL = MutableLiveData<String>()
     val allNews = MutableLiveData<List<NewsItems>>()
 
-
     fun getAllNews() {
         viewModelScope.launch(Dispatchers.IO) {
             val list:MutableList<NewsItems> = mutableListOf()

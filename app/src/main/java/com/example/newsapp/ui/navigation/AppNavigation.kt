@@ -23,8 +23,7 @@ import com.example.newsapp.viewmodel.PhotosViewModel
 fun AppNavigation(paddingValues: PaddingValues) {
     //Navigation
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = Screen.HomeScreen.route, builder = {
-
+    NavHost(navController = navController, startDestination = Screen.HomeScreen.route) {
         composable(Screen.HomeScreen.route) {
             HomeScreen { passedRoute ->
                 navController.navigate(passedRoute)
@@ -39,7 +38,6 @@ fun AppNavigation(paddingValues: PaddingValues) {
             composable(Screen.AllNewsScreen.route) { entry ->
                 val viewModel = entry.sharedViewModel<AllNewsViewModel>(navController)
                 AllNewsScreen(viewModel) { passedRoute ->
-
                     navController.navigate(passedRoute)
                 }
             }
@@ -71,6 +69,6 @@ fun AppNavigation(paddingValues: PaddingValues) {
                 }
             }
         }
-    })
+    }
 }
 
