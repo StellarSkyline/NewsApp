@@ -61,8 +61,6 @@ fun HomeScreen(onNavigate: (String) -> Unit = {}) {
     homeList.add(HomeItem("Photos API", Icons.Default.ImageSearch, Screen.PhotosGraph.route))
     homeList.add(HomeItem("Test Tile"))
 
-    
-
     ConstraintLayout(
         constraintSet = constraints,
         modifier = Modifier
@@ -89,7 +87,6 @@ fun HomeScreen(onNavigate: (String) -> Unit = {}) {
             }
         }
     }
-
 }
 
 @Composable

@@ -26,6 +26,7 @@ class AllNewsViewModel @Inject constructor(
     private val app: Application
 ) : ViewModel() {
     val newsURL = MutableLiveData<String>()
+    val isSpinnerVisible = MutableLiveData<Boolean>()
     val allNews = MutableLiveData<List<NewsItems>>()
 
     fun getAllNews() {
@@ -45,6 +46,7 @@ class AllNewsViewModel @Inject constructor(
             //update State
             withContext(Dispatchers.Main) {
                 allNews.value = list
+                isSpinnerVisible.value = false
             }
         }
     }

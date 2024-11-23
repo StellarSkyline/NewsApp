@@ -31,7 +31,7 @@ class AllNewsRepoImpl(
 
     //Room Calls
     override suspend fun insertNews(title: String, url: String) {
-        db.dao.upsertNews(NewsEntity(title = title, url = url))
+        db.dao.insertNews(NewsEntity(title = title, url = url))
     }
 
     override suspend fun deleteNews(title: String, url: String) {

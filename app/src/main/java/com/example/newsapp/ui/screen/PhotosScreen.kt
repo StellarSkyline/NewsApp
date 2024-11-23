@@ -120,7 +120,6 @@ fun PhotosScreen(vm:PhotosViewModel, onNavigate:(String) -> Unit = {}) {
                         onNavigate(Screen.PhotoDetailsScreen.route)
                     }
                 }
-
             }
         }
         CustomButton(modifier = Modifier

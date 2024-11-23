@@ -13,6 +13,7 @@ import com.example.newsapp.data.Photo
 import com.example.newsapp.domain.repo.AllNewsRepo
 import com.example.newsapp.domain.repo.PhotosRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -26,7 +27,7 @@ class PhotosViewModel @Inject constructor(
     val photo = MutableLiveData<Photo>()
 
     fun getAllPhotos() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             allPhotos.value = repo.getPhotos()
         }
     }
@@ -36,6 +37,5 @@ class PhotosViewModel @Inject constructor(
         super.onCleared()
         Log.d("STLog", "Photos ViewModel cleared")
     }
-
 
 }

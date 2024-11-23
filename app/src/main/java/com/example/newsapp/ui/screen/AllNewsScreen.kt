@@ -53,6 +53,7 @@ fun AllNewsScreen(vm:AllNewsViewModel, onNavigate:(String) -> Unit = {}) {
     }
 
     val list = vm.allNews.observeAsState().value
+    val spinner = vm.isSpinnerVisible.observeAsState().value
 
     val constraints = ConstraintSet {
         val tv_title = createRefFor("tv_title")

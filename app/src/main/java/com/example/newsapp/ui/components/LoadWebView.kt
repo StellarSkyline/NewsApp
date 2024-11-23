@@ -19,10 +19,3 @@ fun LoadWebView(url:String = "",modifier: Modifier = Modifier) {
         update = { webView -> webView.loadUrl(url) }
     )
 }
-
-//                settings.javaScriptEnabled = true
-//                webViewClient = WebViewClient()
-//
-//                settings.loadWithOverviewMode = true
-//                settings.useWideViewPort = true
-//                settings.setSupportZoom(true)

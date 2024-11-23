@@ -27,10 +27,10 @@ import com.example.newsapp.data.HomeItem
 @Composable
 @Preview
 fun GridItem(homeItem: HomeItem = HomeItem(), onClick: () -> Unit = {}) {
-
     Card(
         modifier = Modifier.size(100.dp),
         elevation = CardDefaults.cardElevation(4.dp)
+
     ) {
 
         Column(
@@ -51,9 +51,6 @@ fun GridItem(homeItem: HomeItem = HomeItem(), onClick: () -> Unit = {}) {
             Text(text = homeItem.title,
                 fontSize = 16.sp,
                 color = Color.White)
-
         }
-
     }
-
 }
