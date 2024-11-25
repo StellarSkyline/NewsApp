@@ -38,7 +38,7 @@ import javax.inject.Inject
 
 @Composable
 fun NewsDetailsScreen(vm:AllNewsViewModel, onNavigate: (String) -> Unit = {}){
-    val url= vm.newsURL.observeAsState().value
+    val url= vm.newsURL
 
     val constrains = ConstraintSet {
         val btn_back = createRefFor("btn_back")
@@ -73,7 +73,7 @@ fun NewsDetailsScreen(vm:AllNewsViewModel, onNavigate: (String) -> Unit = {}){
             onNavigate(Screen.AllNewsScreen.route)
         }
         LoadWebView(
-            url = url.toString(),
+            url = url,
             modifier = Modifier
             .layoutId("wv_news"))
     }

@@ -7,6 +7,7 @@ package com.example.newsapp.viewmodel
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.newsapp.R
@@ -23,11 +24,11 @@ import javax.inject.Inject
 @HiltViewModel
 class AllNewsViewModel @Inject constructor(
     private val repo: AllNewsRepo,
-    private val app: Application
+    private val app: Application,
+    private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
-    val newsURL = MutableLiveData<String>()
-    val isSpinnerVisible = MutableLiveData<Boolean>()
-    val allNews = MutableLiveData<List<NewsItems>>()
+    var newsURL =""
+    val allNews = savedStateHandle.getStateFlow("allNews", emptyList<NewsItems>())
 
     fun getAllNews() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -44,19 +45,14 @@ class AllNewsViewModel @Inject constructor(
             }
 
             //update State
-            withContext(Dispatchers.Main) {
-                allNews.value = list
-                isSpinnerVisible.value = false
-            }
+            savedStateHandle["allNews"] = list
         }
     }
 
     fun deleteNewsTable() {
         viewModelScope.launch(Dispatchers.IO) {
             repo.deleteAllNewsTable()
-            withContext(Dispatchers.Main) {
-                allNews.value = emptyList()
-            }
+            savedStateHandle["allNews"] = emptyList<NewsItems>()
         }
     }
 

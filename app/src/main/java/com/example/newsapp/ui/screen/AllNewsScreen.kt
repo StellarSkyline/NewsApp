@@ -36,6 +36,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.example.newsapp.domain.repo.AllNewsRepo
 import com.example.newsapp.ui.components.CustomButton
@@ -45,15 +46,13 @@ import com.example.newsapp.viewmodel.AllNewsViewModel
 
 @Composable
 fun AllNewsScreen(vm:AllNewsViewModel, onNavigate:(String) -> Unit = {}) {
-    var isSpinnerVisible:Boolean by remember { mutableStateOf(true) }
 
     //will only launch once
     LaunchedEffect(Unit) {
         vm.getAllNews()
     }
 
-    val list = vm.allNews.observeAsState().value
-    val spinner = vm.isSpinnerVisible.observeAsState().value
+    val list by vm.allNews.collectAsStateWithLifecycle()
 
     val constraints = ConstraintSet {
         val tv_title = createRefFor("tv_title")
@@ -127,10 +126,9 @@ fun AllNewsScreen(vm:AllNewsViewModel, onNavigate:(String) -> Unit = {}) {
                 .layoutId("rv_list")
                 .padding(top = 32.dp)
         ) {
-            if(!list.isNullOrEmpty()) isSpinnerVisible = false
-            items(list ?: emptyList()) { item ->
+            items(list) { item ->
                 ListItem(modifier = Modifier, item = item) {
-                    vm.newsURL.value = item.url
+                    vm.newsURL = item.url
                     onNavigate(Screen.NewsDetailsScreen.route)
                 }
             }
@@ -141,6 +139,7 @@ fun AllNewsScreen(vm:AllNewsViewModel, onNavigate:(String) -> Unit = {}) {
             title = "Clear Database"
         ) {
             vm.deleteNewsTable()
+            onNavigate(Screen.HomeScreen.route)
         }
 
         CustomButton(
@@ -150,6 +149,6 @@ fun AllNewsScreen(vm:AllNewsViewModel, onNavigate:(String) -> Unit = {}) {
             onNavigate(Screen.HomeScreen.route)
         }
 
-        if(isSpinnerVisible) IncludeSpinner(modifier = Modifier.layoutId("include_spinner"))
+        if(list.isEmpty()) IncludeSpinner(modifier = Modifier.layoutId("include_spinner"))
     }
 }
