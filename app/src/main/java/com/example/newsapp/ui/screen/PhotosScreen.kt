@@ -13,6 +13,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
@@ -30,6 +31,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.newsapp.ui.components.CustomButton
@@ -43,11 +45,7 @@ fun PhotosScreen(vm:PhotosViewModel, onNavigate:(String) -> Unit = {}) {
         vm.getAllPhotos()
     }
 
-    var isSpinnerVisible:Boolean by remember {
-        mutableStateOf(true)
-    }
-    val list = vm.allPhotos.observeAsState().value
-
+    val list by vm.allPhotos.collectAsStateWithLifecycle()
 
     //Set up constraint layout
     val constraints = ConstraintSet {
@@ -112,11 +110,10 @@ fun PhotosScreen(vm:PhotosViewModel, onNavigate:(String) -> Unit = {}) {
             horizontalArrangement = Arrangement.spacedBy(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            if(!list.isNullOrEmpty()) {
-                isSpinnerVisible = false
+            if(list.isNotEmpty()) {
                 items(list.size) { photo ->
                     PhotoGridItem(modifier = Modifier,imageUrl = list[photo].src.medium) {
-                        vm.photo.value = list[photo]
+                        vm.photo = list[photo]
                         onNavigate(Screen.PhotoDetailsScreen.route)
                     }
                 }
@@ -128,6 +125,6 @@ fun PhotosScreen(vm:PhotosViewModel, onNavigate:(String) -> Unit = {}) {
             onNavigate(Screen.HomeScreen.route)
         }
 
-        if(isSpinnerVisible) IncludeSpinner(modifier = Modifier.layoutId("include_spinner"))
+        if(list.isEmpty()) IncludeSpinner(modifier = Modifier.layoutId("include_spinner"))
     }
 }

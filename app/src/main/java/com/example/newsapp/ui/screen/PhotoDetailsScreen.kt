@@ -37,10 +37,8 @@ import com.example.newsapp.viewmodel.PhotosViewModel
 @Composable
 @OptIn(ExperimentalGlideComposeApi::class)
 fun PhotoDetailsScreen(vm: PhotosViewModel, onNavigate: (String) -> Unit = {}) {
-    val photo = vm.photo.observeAsState().value
 
-    Log.d("STLog", "PhotoDetailsScreen: $photo")
-
+    val photo = vm.photo
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -62,7 +60,7 @@ fun PhotoDetailsScreen(vm: PhotosViewModel, onNavigate: (String) -> Unit = {}) {
         ) {
             GlideImage(
                 modifier = Modifier.fillMaxSize(),
-                model = photo!!.src.large,
+                model = photo.src.large,
                 contentDescription = "Photo",
                 contentScale = ContentScale.Crop
             )
@@ -80,9 +78,8 @@ fun PhotoDetailsScreen(vm: PhotosViewModel, onNavigate: (String) -> Unit = {}) {
                 contentDescription = "Photographer Name"
             )
             Spacer(modifier = Modifier.width(8.dp))
-            Text(text = photo!!.photographer, fontSize = 16.sp, color = Color.DarkGray)
+            Text(text = photo.photographer, fontSize = 16.sp, color = Color.DarkGray)
         }
-
 
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -95,7 +92,7 @@ fun PhotoDetailsScreen(vm: PhotosViewModel, onNavigate: (String) -> Unit = {}) {
             )
             Spacer(modifier = Modifier.width(8.dp))
             Text(
-                text = photo!!.photographer_url,
+                text = photo.photographer_url,
                 fontSize = 16.sp, color = Color.DarkGray
             )
         }
