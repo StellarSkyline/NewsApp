@@ -113,7 +113,7 @@ fun PhotosScreen(vm:PhotosViewModel, onNavigate:(String) -> Unit = {}) {
             if(list.isNotEmpty()) {
                 items(list.size) { photo ->
                     PhotoGridItem(modifier = Modifier,imageUrl = list[photo].src.medium) {
-                        vm.photo = list[photo]
+                        vm.photo.value = list[photo]
                         onNavigate(Screen.PhotoDetailsScreen.route)
                     }
                 }

@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
+import com.example.newsapp.data.Photo
 import com.example.newsapp.ui.components.CustomButton
 import com.example.newsapp.ui.navigation.Screen
 import com.example.newsapp.viewmodel.PhotosViewModel
@@ -38,7 +39,7 @@ import com.example.newsapp.viewmodel.PhotosViewModel
 @OptIn(ExperimentalGlideComposeApi::class)
 fun PhotoDetailsScreen(vm: PhotosViewModel, onNavigate: (String) -> Unit = {}) {
 
-    val photo = vm.photo
+    val photo = vm.photo.observeAsState().value ?: Photo()
 
     Column(
         modifier = Modifier.fillMaxSize(),
